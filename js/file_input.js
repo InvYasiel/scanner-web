@@ -182,5 +182,56 @@ $(function() {
         $node.find("img").attr("src", canvas.toDataURL());
         $node.find("h4.code").html(code);
         $("#result_strip ul.thumbnails").prepend($node);
+        datos(code);
     });
 });
+function datos(code){
+    var ID = '';
+    var Tipo = '';
+    var Descripcion = '';
+    var Modelo = '';
+    var Ubicacion = '';
+    var Adquirido = '';
+    var CodeBar = '';
+ for (let i = 0; i < datosInfo.length; i++) {
+    ID = datosInfo[i].ID; 
+    Tipo = datosInfo[i].Tipo; 
+    Descripcion = datosInfo[i].Descripcion; 
+    Modelo = datosInfo[i].Modelo; 
+    Ubicacion = datosInfo[i].Ubicación;
+    Adquirido = datosInfo[i].Adquirido;
+    CodeBar = datosInfo[i].CodeBar;
+    var informacion = [ID,Tipo,Descripcion,Modelo,Ubicacion,Adquirido,CodeBar];
+     if(datosInfo[i].CodeBar == code){
+        var contenido = '<h2>'+Tipo+'</h2>'+'</br>'+
+        '<b>Descripción: </b>'+Descripcion+'</br>'+
+        '<b>Modelo: </b>'+Modelo+'</br>'+
+        '<b>Ubicación: </b>'+Ubicacion+'</br>'+
+        '<b>Adquirido: </b>'+Adquirido+'</br>'+
+        '<b>Código: </b>'+CodeBar+'</br>';
+
+        for (let j = 0; j < informacion.length; j++) {
+            if(informacion[i] == '' || informacion[i] ==  null || informacion[i] ==  undefined ){
+                informacion[i]= 'No hay datos actualmente';
+            }
+        }
+        document.getElementById('contenedorInfo').innerHTML += contenido;
+
+        $('#modalInfo').modal('show');
+     }
+     
+ }
+}
+var datosInfo = [{
+    ID: '1',
+    Tipo: 'Teclado',
+    Descripcion: 'Logitech ',
+    Modelo:'K120',
+    Ubicación: 'MEXSA - Habitación -2018 - 5',
+    Puesto: 'Administrativo',
+    Adquirido: '13/12/1994',
+    CodeBar: 'S-01-K-18-0001017',
+
+
+}];
+console.log(datosInfo)
